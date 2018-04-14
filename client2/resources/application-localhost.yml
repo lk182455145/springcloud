@@ -1,0 +1,9 @@
+server:
+  port: 8000  #设定端口号
+    
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://admin:admin@${eureka.instance.hostname}:${server.port}/eureka/

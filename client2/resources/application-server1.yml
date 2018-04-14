@@ -1,0 +1,9 @@
+server:
+  port: 8100  #设定端口号
+    
+eureka:
+  instance:
+    hostname: server1
+  client:
+    service-url:
+      defaultZone: http://admin:admin@server2:8200/eureka/,http://admin:admin@server3:8300/eureka/

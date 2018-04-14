@@ -1,0 +1,15 @@
+server:
+  port: 9001  #设定端口号
+  
+spring:
+  application:
+    name: eureka-client
+      
+eureka:
+  instance:
+    prefer-ip-address: true #注册时使用ip而不是主机名
+    instance-id: ${spring.application.name}(${spring.cloud.client.ipAddress}:${server.port})
+  client:
+    service-url:
+#      defaultZone: http://admin:admin@localhost:8100/eureka/,http://admin:admin@localhost:8200/eureka/,http://admin:admin@localhost:8300/eureka/
+      defaultZone: http://admin:admin@localhost:8000/eureka/

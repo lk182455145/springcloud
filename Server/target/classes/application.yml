@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: localhost
+
+security:
+  user:
+    name: admin
+    password: admin
+      
+eureka:
+  server:
+    enable-self-preservation: false #可以设置改参数值为false,以确保注册中心将不可用的实例删除
+  instance:
+    #prefer-ip-address: true #注册时使用ip而不是主机名，注册中心不打开不然会一直unavailable-replicas
+    #instance-id: ${spring.cloud.client.ipAddress}:${server.port} #ip地址:端口
+    instance-id: ${spring.application.name}:${server.port} #名称:端口
+  client:
+    #集群服务中心,需要下面2个设置为true(默认为true)屏蔽即可,因为服务中心需要相互注册(A <-> B <-> C <-> A);单服务中心就打开
+    register-with-eureka: false #是否向服务注册中心注册自己
+    fetch-registry: false #是否检索服务
+    
+      
