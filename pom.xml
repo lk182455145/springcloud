@@ -234,13 +234,10 @@
   	<module>eureka-server</module>
   	<module>eureka-client</module>
   	<module>eureka-consumer</module>
-  	<module>eureka-server2</module>
   	<module>eureka-server-cluster1</module>
   	<module>eureka-server-cluster2</module>
   	<module>ribbon-consumer</module>
   	<module>feign-consumer</module>
-  	<module>aa</module>
-  	<module>vsdf</module>
   	<module>feign-intf</module>
   	<module>feign-client</module>
   	<module>feign-client-consumer</module>
