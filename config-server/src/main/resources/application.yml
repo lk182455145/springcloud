@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: config-server  cloud:    config:      server:        git:
+          uri: https://github.com/lk182455145/spring-cloud-config.git
+          #强制拉取资源文件
+          force-pull: true
+          #对应根目录下的某个目录
+#          search-paths:#          username: 
+#          password:             
+        
+server:
+  port: 60000

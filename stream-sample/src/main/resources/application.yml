@@ -1,0 +1,101 @@
+server:
+  port: 63000
+  
+spring:
+  application:
+    name: stream-sample
+      # rabbitmq 连接信息
+  rabbitmq:
+    addresses: 192.168.163.100:5672,192.168.163.101:5672,192.168.163.102:5672
+    username: guest
+    password: guest
+    # 默认开启全局requeue#    listener:
+#      direct:#        default-requeue-rejected: true#      simple:#        default-requeue-rejected: true
+    
+  cloud:    stream:
+      bindings:
+        # 绑定channel到自定义的名称(broadcast)
+        mytopic-input:
+          destination: broadcast
+        mytopic-output:
+          destination: broadcast
+          
+        # 消息分组
+        group-input:
+          destination: grouptopic
+          group: Group-A
+          # 打开消费分区功能
+          consumer:            partitioned: true
+        group-output:
+          destination: grouptopic
+          producer:
+            # 两个消费分区            partition-count: 2
+            # 可以是SpEL表达式
+            # 只有索引为1的节点（消费者），才能消费消息
+            partition-key-expression: "1"
+            
+        # 异常消息（单机版重试）
+        error-topic-input:
+          destination: errortopic
+          # 异常重试次数（本机重试）,在当前的consumer中不断的重试，不会把消息重新发送给rabbitmq
+          consumer:
+            # 重试次数。次数=1相当于不重试，因为consumer消费第一次消费消息就是1            max-attempts: 2
+        error-topic-output:
+          destination: errortopic
+        
+        # 异常重试（requeue），当有异常时重新返回队列
+        requeue-topic-input:
+          destination: requeue-topic
+          group: requeue-group          consumer:
+            # 必须把max-attempts设置为1，不然requeue不生效，就会变成单机版的异常重试
+            max-attempts: 1
+        requeue-topic-output:
+          destination: requeue-topic
+      # 仅对当前consumer开启requeue重试，测试没起作用，未解决
+#      rabbit:#        bindings:#          requeue-topic-input:
+#            consumer:
+#              requeueRejected: true
+
+
+        # fallback配置
+        fallback-topic-input:
+          destination: fallback-topic
+          group: fallback-group
+          consumer:            max-attempts: 2
+        fallback-topic-output:
+          destination: fallback-topic
+              
+        # 死信队列配置   
+        dlq-topic-input:
+          destination: dlq-topic
+          group: dlq-group
+          consumer:            max-attempts: 2
+        dlq-topic-output:
+          destination: dlq-topic
+      # 开启死信队列，默认名称xxx.dlq
+      rabbit:        bindings:          dlq-topic-input:
+            consumer:              auto-bind-dlq: true
+              
+              
+        
+          
+              
+      # 消费分区
+      # 当前消费者实例总数      instance-count: 2
+      # 最大值:instance-count-1,当前实例的索引
+      instance-index: 1
+      
+      # 延迟消息（老版配置）
+#      rabbit:#        bindings:#          mytopic-output:
+#            producer:
+#              delayed-exchange: true              
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

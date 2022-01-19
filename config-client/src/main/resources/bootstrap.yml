@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: config-clinet  cloud:    config:
+      name: config
+      profile: prod
+      label: main
+#      uri: http://localhost:6000
+      #启动eureka服务器发现找到配置中心
+      discovery:
+        enabled: true
+        service-id: config-server-eureka            
+        
+server:
+  port: 61000
+  
+management:  endpoints:    web:      exposure:        include:        - "*"
+  endpoint:    health:      show-details: ALWAYS
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+      
+my:
+  message: ${info.message}

@@ -1,0 +1,15 @@
+spring:  application:    name: gateway-sample  cloud:    gateway:      # 跨域请求#      globalcors:#        cors-configurations:#          '[/**]':#            allowed-origins:#              - "http://localhost:8080"#              - "*"#            # 比如cookie, authorization之类的认证信息#            allow-credentials: true#            # 允许接收的header#            allowed-headers: "*"#            # 允许接收的请求方法，如GET,POST#            allowed-methods: "*"#            # 允许相应的header#            exposed-headers: "*"#            # 表示Options可以在浏览器缓存多长时间#            max-age: 600                   discovery:        locator:          #根据eureka服务注册，通过serviceId自动创建路由规则          enabled: true          #访问路劲的serviceId大写变成小写          lower-case-service-id: true                # 配置路由规则      routes:      - id: feign-client        uri: lb://FEIGN-CLIENT        predicates:        - Path=/yml/**        filters:        # 去掉请求路劲的个数，如请求路劲/yml/aaa,那么StripPrefix=1就是去掉一个路劲变成/aaa        - StripPrefix=1        - GatewayTimerYmlFilter              server:  port: 65000      
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/

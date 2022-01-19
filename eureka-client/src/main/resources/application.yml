@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: eureka-client
+server:
+  port: 30000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+#      defaultZone: http://cluster1:20000/eureka/,http://cluster2:20001/eureka/
+  instance:
+    #心跳发发送频率，指定续约更新频率
+    lease-renewal-interval-in-seconds: 5
+    #设置过期剔除时间，这个值必须大于lease-renewal-interval-in-seconds
+    lease-expiration-duration-in-seconds: 30
+    #以IP地址注册到服务中心#    prefer-ip-address: true
+    #服务中心的信息显示格式
+#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    

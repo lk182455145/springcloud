@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: hystrix-turbine
+
+server:
+  port: 52000
+  
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+
+turbine:
+  #指定所需监控的服务名称  app-config: hystrix-consumer
+  #监控哪个集群
+  cluster-name-expression: new String("default")
+  #将端口和hostname作为区分不同服务的条件
+  combine-host-port: true
+  aggregator:
+    #集群配置服务    cluster-config:    - default
+
+      

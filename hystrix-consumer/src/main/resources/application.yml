@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: hystrix-consumer  main:    allow-bean-definition-overriding: true
+
+server:
+  port: 50000
+  
+feign:  hystrix:
+    #开启feign下的hystrix功能    enabled: true
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+
+#参考配置地址：https://github.com/Netflix/Hystrix/wiki/Configuration
+hystrix:
+  command:
+    default:
+      fallback:
+        #是否开启服务降级
+        enable: true
+      execution:
+        timeout:
+          #开启全局超时
+          enable: true
+        isolation:
+          thread:
+            #超时时间
+            timeoutInMilliseconds: 2000
+            #超时以后终止线程
+            interruptOnTimeout: true
+            #取消的时候终止线程
+            interruptOnFutureCancel: true
+      circuitBreaker:
+        #开启熔断功能（默认就是true）
+        enable: true
+        #true:强制开启熔断开关(默认false)
+        forceOpen: false
+        #true:强制关闭熔断开关（默认false）
+        forceClosed: false
+        #熔断的前提条件（请求数量）,在一定的时间窗口内（metrics.rollingStats.timeInMilliseconds），请求达到5个以后，才开始机型熔断判断
+        requestVolumeThreshold: 5
+        #超过50%的失败请求，则熔断开关开启
+        errorThresholdPercentage: 50
+        #当熔断开启以后，经过多少秒在进入半开状态（经过15秒后释放一个请求去执行真实的请求，如果还是失败继续熔断，没有则释放熔断）
+        sleepWindowInMilliseconds: 15000
+      metrics:
+        rollingStats:
+          #配置时间窗口
+          timeInMilliseconds: 30000
+    #类名#方法名(参数类型n...)熔断降级局部处理
+#    IHystrixService#retry(int):
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 1000
+  
+feign-client:
+  ribbon:
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 0
+    ConnectTimeout: 1000
+    ReadTimeout: 8000
+    OkToRetryOnAllOperations: false
+
+management:
+  endpoints:    web:      exposure:        include: "*"
+  endpoint:    health:      show-details: always

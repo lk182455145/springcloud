@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ribbon-consumer
+
+server:
+  port: 31000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+      
+#ribbon:
+#  eager-load:
+#    #开启ribbon的饥饿加载模式（服务启动加载）#    enabled: true
+#    #需要饥饿加载的服务名称
+#    clients:#    - eureka-client
+   
+##########配置单个服务（服务名：eureka-client）使用的负载均衡算法#########
+#eureka-client:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

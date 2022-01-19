@@ -1,0 +1,1 @@
+spring:  application:    name: eureka-server-clusterserver:  port: 20000  eureka:  instance:#    prefer-ip-address: true#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}    hostname: cluster1  client:    register-with-eureka: true    fetch-registry: false    service-url:      defaultZone: http://cluster2:20001/eureka/

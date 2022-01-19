@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: fegin-client-consumer#  main:#    allow-bean-definition-overriding: true
+
+server:
+  port: 41000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+      
+feign-client:
+  ribbon:
+    # 每台节点最大重试次数(加上第一次的连接次数，那么总共的尝试连接次数为3(1+MaxAutoRetries)次)
+    MaxAutoRetries: 2
+    # 可以重试几台节点(加上第一次的连接节点，那么总共的尝试连接节点为3(1+MaxAutoRetriesNextServer)次)
+    # 这个参数和MaxAutoRetries参数是共用的,当连接新的节点时又会进行(1+MaxAutoRetries)次的尝试
+    MaxAutoRetriesNextServer: 2
+    # 连接超时(毫秒)
+    ConnectTimeout: 1000
+    # 服务响应超时(毫秒)
+    ReadTimeout: 2000
+    # 对所有的HTTP Method进行重试,如果设置成false只对GET请求进行重试
+    OkToRetryOnAllOperations: true
