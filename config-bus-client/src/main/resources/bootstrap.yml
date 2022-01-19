@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: config-bus-clinet
+  rabbitmq:
+    addresses: 192.168.163.100:5672,192.168.163.101:5672,192.168.163.102:5672
+    username: guest
+    password: guest  cloud:
+    stream:
+      # 假如引用了多个binder。如rabbitmq和kafka的情况下，不指定默认binder程序会不知道到底引用哪个binder。       default-binder: rabbit    config:
+      name: config
+      profile: prod
+      label: main
+      #启动eureka服务器发现找到配置中心
+      discovery:
+        enabled: true
+        service-id: config-bus-server            
+        
+server:
+  port: 61010
+  
+management:  endpoints:    web:      exposure:        include:        - "*"
+  endpoint:    health:      show-details: ALWAYS
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka/
+      
+my:
+  message: ${info.message}
