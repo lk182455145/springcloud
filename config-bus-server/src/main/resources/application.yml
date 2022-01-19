@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: config-bus-server
+  rabbitmq:
+    addresses: 192.168.163.100:5672,192.168.163.101:5672,192.168.163.102:5672
+    username: guest
+    password: guest  cloud:    config:      server:        git:
+          timeout: 10
+          uri: https://github.com/lk182455145/spring-cloud-config.git
+          force-pull: true
+            
+        
+server:
+  port: 60010
+
+eureka:  client:    service-url:      defaultZone: http://localhost:20000/eureka/
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
