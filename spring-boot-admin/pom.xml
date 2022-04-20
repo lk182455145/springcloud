@@ -5,31 +5,20 @@
     <artifactId>spring-cloud-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>eureka-client</artifactId>
+  <artifactId>spring-boot-admin</artifactId>
   
   <dependencies>
-  	<dependency>
+  	  <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-server</artifactId>
+      </dependency>
+      <dependency>
   		<groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-  	</dependency>
-  	<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
+  	  </dependency>
+      <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
+      </dependency>
   </dependencies>
-  
-  <build>
-	<plugins>
-		<plugin>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-maven-plugin</artifactId>
-			<version>2.3.12.RELEASE</version>
-		</plugin>
-	</plugins>
-  </build>
-  
 </project>

@@ -28,6 +28,13 @@
 		    <type>pom</type>
             <scope>import</scope>
   		</dependency>
+  		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-dependencies</artifactId>
+			<version>2.3.1</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
   	</dependencies>
   </dependencyManagement>
   
@@ -251,6 +258,7 @@
   	<module>config-bus-client</module>
   	<module>gateway-sample</module>
   	<module>stream-sample</module>
+  	<module>spring-boot-admin</module>
   </modules>
   
 </project>

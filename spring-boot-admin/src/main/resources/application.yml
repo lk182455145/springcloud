@@ -1,14 +1,13 @@
 spring:
   application:
-    name: eureka-client
+    name: admin-server
 server:
-  port: 30000
+  port: 10000
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:20000/eureka/
-#      defaultZone: http://cluster1:20000/eureka/,http://cluster2:20001/eureka/
   instance:
     #心跳发发送频率，指定续约更新频率
     lease-renewal-interval-in-seconds: 5

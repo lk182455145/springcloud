@@ -74,7 +74,8 @@ spring:
           destination: dlq-topic
       # 开启死信队列，默认名称xxx.dlq
       rabbit:        bindings:          dlq-topic-input:
-            consumer:              auto-bind-dlq: true
+            consumer:
+              auto-bind-dlq: true
               
               
         
