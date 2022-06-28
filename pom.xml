@@ -235,8 +235,14 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
-  
+
   <modules>
   	<module>eureka-server</module>
   	<module>eureka-client</module>
